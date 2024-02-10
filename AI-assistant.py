@@ -8,8 +8,4 @@ def speech(text):
     engine.say(text)
     engine.runAndWait()
     
-    
-    
-    
-    
 speech("hello world")
