@@ -7,5 +7,5 @@ def speech(text):
     engine.setProperty('rate',120)
     engine.say(text)
     engine.runAndWait()
-    
+
 speech("hello world")
