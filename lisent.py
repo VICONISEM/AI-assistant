@@ -8,7 +8,7 @@ from speech_recognition import UnknownValueError
 # global variables
 r = sr.Recognizer()
 source = sr.Microphone(0)
-keywords = [("tito", 0.7), ("wakeup tito", 1)]
+keywords = [("tito", 0.7), ("wakeup tito", 0.7)]
 
 
 def start_main():
