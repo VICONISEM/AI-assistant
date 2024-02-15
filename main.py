@@ -9,7 +9,7 @@ import pyttsx3
 # global variables
 r = sr.Recognizer()
 source = sr.Microphone(0)
-keywords = [("tito", 0.7), ("wakeup tito", 0.7)]
+keywords = [("tito", 0.8), ("wakeup tito", 0.7)]
 
 def speak(text:str):
     tts_engine=pyttsx3.init()
@@ -25,13 +25,13 @@ def speak(text:str):
         
 def time_date():
     date=dt.date.today()
-    name_of_day=calendar.day_name[today.weekday()]
+    name_of_day=calendar.day_name[date.weekday()]
     H=dt.datetime.now().hour
     M=dt.datetime.now().minute
     if H >=0 and H <= 12: 
-        str=f"good moring sir @p today is {name_of_day} @p {today} time is {H} @p ,{M}"
+        str=f"good moring sir @p today is {name_of_day} @p {date} time is {H} @p ,{M}"
     else :
-        str=f"good afternon sir @p today is {name_of_day} @p {today} @p time is {H} ,{M}"
+        str=f"good afternon sir @p today is {name_of_day} @p {date} @p time is {H} ,{M}"
     return str
         
     
@@ -45,8 +45,12 @@ def main():
         r=sr.Recognizer()
         with sr.Microphone(0) as source:
             audio=r.listen(source)
-        text=r.recognize_google(audio)
-        speak(text)
+        try:
+            text=r.recognize_google(audio)
+            speak(text)
+        except UnknownValueError as e:
+            print("Couldn't understand the audio. Please try again.")
+            
     
 
 
