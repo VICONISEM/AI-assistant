@@ -3,7 +3,8 @@ import datetime as dt
 from speech_recognition import UnknownValueError
 import calendar
 import pyttsx3
-
+import calender_API
+import os
 
 
 # global variables
@@ -29,9 +30,9 @@ def time_date():
     H=dt.datetime.now().hour
     M=dt.datetime.now().minute
     if H >=0 and H <= 12: 
-        str=f"good moring sir @p today is {name_of_day} @p {date} time is {H} @p ,{M}"
+        str=f"good moring victor @p today is {name_of_day} @p {date} @p time is {H} @p ,{M}"
     else :
-        str=f"good afternon sir @p today is {name_of_day} @p {date} @p time is {H} ,{M}"
+        str=f"good afternon victor @p today is {name_of_day} @p {date} @p time is {H} @p ,{M}"
     return str
         
     
@@ -47,7 +48,12 @@ def main():
             audio=r.listen(source)
         try:
             text=r.recognize_google(audio)
-            speak(text)
+            text=text.lower()
+            if "tell me about my events in my calendar" in text:
+                events=calender_API.events()
+                speak(events)
+            elif "you can go now" in text:
+                exit()
         except UnknownValueError as e:
             print("Couldn't understand the audio. Please try again.")
             
