@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import speak_module
-from time import sleep
+import datetime as dt
 from speech_recognition import UnknownValueError
 
 
@@ -9,19 +9,19 @@ from speech_recognition import UnknownValueError
 r = sr.Recognizer()
 source = sr.Microphone(0)
 keywords = [("tito", 0.7), ("wakeup tito", 0.7)]
-
-
-def start_main():
-    speak_module.speak("tell me how i can help you to day ")
-    r=sr.Recognizer()
-    with sr.Microphone(0) as source:
-        audio=r.listen(source)
-    text=r.recognize_google(audio)
-    speak_module.speak(text)
+    
+def main():
+    while True:
+        speak_module.speak("how can i help you sir")
+        r=sr.Recognizer()
+        with sr.Microphone(0) as source:
+            audio=r.listen(source)
+        text=r.recognize_google(audio)
+        speak_module.speak(text)
     
 
 
-def start_recognize():
+def wakeupTito():
     print("listen ........")
     with source:
        audio= r.listen(source)
@@ -29,12 +29,12 @@ def start_recognize():
         text = r.recognize_sphinx(audio, keyword_entries=keywords)
         if ("tito" in text or "wakeup tito" ):
             speak_module.speak("yes sir")
-            start_main()
+            main()
         
     except UnknownValueError as e:
      print("Couldn't understand the audio. Please try again.")
 
 
 
-start_recognize()
+wakeupTito()
 
